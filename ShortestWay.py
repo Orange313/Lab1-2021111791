@@ -37,7 +37,7 @@ def shortest_path(graph, start_word, end_word):
     path_length = sum(graph.get_edge_weight(path[i], path[i+1]) for i in range(len(path)-1))
 
     return path, path_length
-
+'''
 if __name__ == "__main__":
     file_path = "input.txt"
     word_graph = process_text(file_path)
@@ -51,3 +51,4 @@ if __name__ == "__main__":
         print("路径长度：", path_length)
     else:
         print("输入的两个单词不可达。")
+'''

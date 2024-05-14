@@ -20,7 +20,7 @@ def find_bridge_words(graph, word1, word2):
      bridge_words_list = list(bridge_words)  
      bridge_words_str = ', '.join(bridge_words_list[:-1]) + bridge_words_list[-1]  
      return "The bridge words from {} to {} is: {}.".format(word1, word2, bridge_words_str) 
-
+'''
 if __name__ == "__main__":  
     file_path = 'input.txt'   
     word_graph = process_text(file_path)  
@@ -28,3 +28,4 @@ if __name__ == "__main__":
     word2 = input("Enter the second word: ").strip().lower()  
     bridge_words_result = find_bridge_words(word_graph, word1, word2)  
     print(bridge_words_result)
+    '''

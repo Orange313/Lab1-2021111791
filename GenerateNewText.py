@@ -32,7 +32,7 @@ def insert_bridge_words(graph, text):
     # 添加最后一个单词  
     new_text.append(words[-1])  
     return ' '.join(new_text) 
-
+'''
 if __name__ == "__main__":  
      file_path = 'input.txt' 
      word_graph = process_text(file_path)  
@@ -41,7 +41,7 @@ new_text_input = input("Enter a new text: ")
 result = insert_bridge_words(word_graph, new_text_input)  
 print("The result is:",result)
 
-
+'''
 
 
 

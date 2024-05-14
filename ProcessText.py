@@ -64,9 +64,10 @@ def draw_graph(graph):
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
     plt.title("Directed Graph")
     plt.show()
-
+'''
 if __name__ == "__main__":
     file_path = "input.txt"  
     word_graph = process_text(file_path)
     draw_graph(word_graph)
     
+'''

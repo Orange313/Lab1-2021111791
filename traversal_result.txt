@@ -1,6 +1,1 @@
-worlds -> to
-to -> seek
-seek -> out
-out -> new
-new -> worlds
-worlds -> to
+new -> civilizations
