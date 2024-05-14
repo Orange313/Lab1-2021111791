@@ -1,6 +1,5 @@
 import re
-import matplotlib.pyplot as plt
-import networkx as nx
+
 
 class DirectedGraph:
     def __init__(self):
@@ -25,10 +24,29 @@ class DirectedGraph:
             return self.graph[source][destination]
         else:
             return None
-    
-    #def get_nodes(self):
-    #    return list(self.graph.keys())
-
+            
+def find_bridge_words(graph, word1, word2):  
+      # Check if words are in the graph  
+     if word1 not in graph.graph and word2 not in graph.graph: 
+        return f"No '{word1}' and '{word2}' in the graph!"  
+     if word1 not in graph.graph:  
+        return f"No '{word1}' in the graph!"  
+     if word2 not in graph.graph:  
+        return f"No '{word2}' in the graph!"  
+      
+     # Find all possible bridge words  
+     bridge_words = set()  
+     for neighbor in graph.graph[word1]:  
+        if word2 in graph.graph[neighbor]:  
+            bridge_words.add(neighbor)  
+  
+     # Format the output  
+     if not bridge_words:  
+        return "No bridge words from {} to {}!".format(word1, word2)  
+      
+     bridge_words_list = list(bridge_words)  
+     bridge_words_str = ', '.join(bridge_words_list[:-1]) + bridge_words_list[-1]  
+     return "The bridge words from {} to {} is: {}.".format(word1, word2, bridge_words_str) 
 
 def process_text(file_path):
     word_graph = DirectedGraph()
@@ -46,21 +64,15 @@ def process_text(file_path):
                         word_graph.add_edge(word1, word2, weight=1)
     return word_graph
 
-def draw_graph(graph):
-    G = nx.DiGraph()
-    for source, targets in graph.graph.items():
-        for target, weight in targets.items():
-            G.add_edge(source, target, weight=weight)
 
-    pos = nx.spring_layout(G, seed=42)
-    plt.figure(figsize=(10, 6))
-    nx.draw(G, pos, with_labels=True, node_size=500, node_color="pink", font_size=10, arrowsize=10)
-    edge_labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
-    plt.title("Directed Graph")
-    plt.show()
-
-if __name__ == "__main__":
-    file_path = "input.txt"  # 替换成你的文件路径
-    word_graph = process_text(file_path)
-    draw_graph(word_graph)
+if __name__ == "__main__":  
+    file_path = 'input.txt'  # Replace with your actual file path  
+    word_graph = process_text(file_path)  
+  
+    # User input for two words  
+    word1 = input("Enter the first word: ").strip().lower()  
+    word2 = input("Enter the second word: ").strip().lower()  
+  
+    # Find bridge words  
+    bridge_words_result = find_bridge_words(word_graph, word1, word2)  
+    print(bridge_words_result)
