@@ -20,6 +20,9 @@ class DirectedGraph:
     def has_edge(self, source, destination):
         return source in self.graph and destination in self.graph[source]
 
+    def get_neighbors(self, node):
+        return self.graph.get(node, {}).items()
+
     def get_edge_weight(self, source, destination):
         if self.has_edge(source, destination):
             return self.graph[source][destination]

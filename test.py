@@ -1,51 +1,53 @@
+import re
 import random
+from collections import deque
 from ProcessText import process_text
 
-def find_bridge_words(graph, word1, word2):
-    if word1 not in graph.graph and word2 not in graph.graph:
-        return f"No '{word1}' and '{word2}' in the graph!"
-    if word1 not in graph.graph:
-        return f"No '{word1}' in the graph!"
-    if word2 not in graph.graph:
-        return f"No '{word2}' in the graph!"
+def shortest_path(graph, start_word, end_word):
+    visited = set()
+    predecessors = {}
+    queue = deque([start_word])
+    found = False
 
-    bridge_words = set()
-    for neighbor in graph.graph[word1]:
-        if word2 in graph.graph[neighbor]:
-            bridge_words.add(neighbor)
+    while queue:
+        current_word = queue.popleft()
+        if current_word == end_word:
+            found = True
+            break
 
-    if not bridge_words:
-        return "No bridge words from {} to {}!".format(word1, word2)
+        for neighbor, weight in graph.get_neighbors(current_word):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                predecessors[neighbor] = current_word
+                queue.append(neighbor)
 
-    bridge_words_list = list(bridge_words)
-    bridge_words_str = ', '.join(bridge_words_list[:-1]) + bridge_words_list[-1]
-    return "The bridge words from {} to {} is: {}.".format(word1, word2, bridge_words_str)
+    if not found:
+        return None, float('inf')
 
-def insert_bridge_words(graph, text):
-    words = text.split()
-    new_text = []
-    for i in range(len(words) - 1):
-        new_text.append(words[i])
-        word1 = words[i].lower()
-        word2 = words[i + 1].lower()
-        new_text.extend(choose_bridge_word(graph, word1, word2))
-    new_text.append(words[-1])
-    return ' '.join(new_text)
+    # 重构路径
+    path = []
+    current_word = end_word
+    while current_word != start_word:
+        path.append(current_word)
+        current_word = predecessors[current_word]
+    path.append(start_word)
+    path.reverse()
 
-def choose_bridge_word(graph, word1, word2):
-    bridge_words = []
-    for neighbor in graph.graph[word1]:
-        if word2 in graph.graph[neighbor]:
-            bridge_words.append(neighbor)
-    if bridge_words:
-        return [random.choice(bridge_words)]
-    return []
+    # 计算路径长度
+    path_length = sum(graph.get_edge_weight(path[i], path[i+1]) for i in range(len(path)-1))
 
-# Example usage:
+    return path, path_length
+
 if __name__ == "__main__":
-    # Assume you have your DirectedGraph instance stored in 'graph'
-    # and your text in 'text'
-    text = "Seek to explore new and exciting synergies"
-    new_text = insert_bridge_words(graph, text)
-    print("Original text:", text)
-    print("New text:", new_text)
+    file_path = "input.txt"
+    word_graph = process_text(file_path)
+
+    start_word = input("请输入起始单词：").lower()
+    end_word = input("请输入目标单词：").lower()
+
+    shortest_path, path_length = shortest_path(word_graph, start_word, end_word)
+    if shortest_path:
+        print("最短路径：", " → ".join(shortest_path))
+        print("路径长度：", path_length)
+    else:
+        print("输入的两个单词不可达。")
