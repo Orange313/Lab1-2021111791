@@ -42,13 +42,13 @@ if __name__ == "__main__":
     file_path = "input.txt"
     word_graph = process_text(file_path)
 
-    start_word = input("请输入起始单词：").lower()
-    end_word = input("请输入目标单词：").lower()
+    start_word = input("Please enter the source word:").lower()
+    end_word = input("Please enter the destination word:").lower()
 
     shortest_path, path_length = shortest_path(word_graph, start_word, end_word)
     if shortest_path:
-        print("最短路径：", " → ".join(shortest_path))
-        print("路径长度：", path_length)
+        print("the shortest way is:", " → ".join(shortest_path))
+        print("length:", path_length)
     else:
-        print("输入的两个单词不可达。")
+        print("the two words entered are unreachable.")
 '''

@@ -38,9 +38,9 @@ def process_text(file_path):
     processed_text = ""
     with open(file_path, 'r') as file:
         for line in file:
-            line = re.sub(r'[^a-zA-Z\s]', ' ', line)
-            processed_text += line.strip() + " "   # 将标点符号替换为空格
-            words = processed_text.split()
+            line = re.sub(r'[^a-zA-Z\s]', ' ', line)# 将标点符号替换为空格
+            processed_text += line.strip() + " "  #将所有行合并成一行 
+            words = processed_text.split() 
         for i in range(len(words)-1):
             word1 = words[i].lower()
             word2 = words[i+1].lower()
