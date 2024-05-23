@@ -8,6 +8,7 @@ def shortest_path_from_words(graph, start_word, end_word):
     predecessors = {}  # 字典存储前驱节点
     queue = deque([start_word])  # 创建队列，加入起始单词
     found = False  # 用于标识找到终点
+    path_length = 0
 
     while queue:
         current_word = queue.popleft()  # 左侧弹出
@@ -34,7 +35,10 @@ def shortest_path_from_words(graph, start_word, end_word):
     path.reverse()  # 反转路径
 
     # 计算路径长度
-    path_length = sum(graph.get_edge_weight(path[i], path[i + 1]) for i in range(len(path) - 1))
+    #path_length = sum(graph.get_edge_weight(path[i], path[i + 1]) for i in range(len(path) - 1))
+    for i in range(len(path) - 1):
+        edge_weight = graph.get_edge_weight(path[i], path[i + 1])
+        path_length += edge_weight
 
     return path, path_length
 
