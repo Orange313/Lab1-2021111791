@@ -4,11 +4,11 @@ import networkx as nx
 
 class DirectedGraph:
     def __init__(self):
-        self.graph = {} #创建字典。。
+        self.graph = {} #外层字典,键为节点，值为另一字典，该字典键为后继节点，值为权重
 
     def add_edge(self, source, destination, weight=1):
         if source not in self.graph:
-            self.graph[source] = {}
+            self.graph[source] = {}#内层字典
         if destination not in self.graph:
             self.graph[destination] = {}
 
