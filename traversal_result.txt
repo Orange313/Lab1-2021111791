@@ -1,8 +1,6 @@
-explore -> strange
-strange -> new
-new -> civilizations
-civilizations -> to
-to -> have
-have -> a
-a -> good
-good -> time
+seek -> out
+out -> new
+new -> life
+life -> and
+and -> new
+new -> life

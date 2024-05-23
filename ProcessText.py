@@ -4,7 +4,7 @@ import networkx as nx
 
 class DirectedGraph:
     def __init__(self):
-        self.graph = {}
+        self.graph = {} #创建字典。。
 
     def add_edge(self, source, destination, weight=1):
         if source not in self.graph:
@@ -45,7 +45,7 @@ def process_text(file_path):
             word1 = words[i].lower()
             word2 = words[i+1].lower()
             if word1 != word2:
-                if word_graph.has_edge(word1, word2):
+                if word_graph.has_edge(word1, word2): #如果已经有边
                     word_graph.add_edge(word1, word2, weight=word_graph.get_edge_weight(word1, word2) + 1)
                 else:
                     word_graph.add_edge(word1, word2, weight=1)
@@ -57,7 +57,7 @@ def draw_graph(graph):
         for target, weight in targets.items():
             G.add_edge(source, target, weight=weight)
 
-    pos = nx.spring_layout(G, seed=42)
+    pos = nx.spring_layout(G, seed=50)
     plt.figure(figsize=(10, 6))
     nx.draw(G, pos, with_labels=True, node_size=500, node_color="pink", font_size=10, arrowsize=10)
     edge_labels = nx.get_edge_attributes(G, 'weight')
@@ -69,5 +69,5 @@ if __name__ == "__main__":
     file_path = "input.txt"  
     word_graph = process_text(file_path)
     draw_graph(word_graph)
-    
-'''
+''' 
+
