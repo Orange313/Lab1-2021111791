@@ -65,9 +65,11 @@ def main():
         elif choice == '5':
             visited_edges = random_traversal(word_graph)  # 进行随机遍历
             if visited_edges:
-                write_traversal_to_file(visited_edges, "traversal_result.txt")
+                # write_traversal_to_file(visited_edges, "traversal_result.txt")
                 traversal_text = " ".join(
                     [edge[0] for edge in visited_edges] + [visited_edges[-1][1]])
+                with open('traversal_result.txt', 'w',) as file:
+                    file.write(traversal_text)
                 print("随机遍历的节点路径：", traversal_text)
             else:
                 print("图中没有可用的边进行游走。")

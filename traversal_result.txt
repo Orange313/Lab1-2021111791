@@ -1,6 +1,1 @@
-seek -> out
-out -> new
-new -> life
-life -> and
-and -> new
-new -> life
+and new life and new

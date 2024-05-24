@@ -33,7 +33,7 @@ def random_traversal(word_graph):
 def write_traversal_to_file(visited_edges, file_path):
     with open(file_path, 'w') as file:
         for edge in visited_edges:
-            file.write(" -> ".join(edge) + "\n")
+            file.write(" ".join(edge))
 '''
 if __name__ == "__main__":
     word_graph = process_text("input.txt")  
