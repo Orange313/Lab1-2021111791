@@ -3,6 +3,7 @@ import random
 from collections import deque
 from ProcessText import process_text
 
+
 def shortest_path_from_words(graph, start_word, end_word):
     visited = set()  # 存储已访问节点
     predecessors = {}  # 字典存储前驱节点
@@ -23,7 +24,7 @@ def shortest_path_from_words(graph, start_word, end_word):
                 queue.append(neighbor)
 
     if not found:
-        return None, float('inf')
+        return None, float("inf")
 
     # 从最后弹出的节点（终点），往前回溯，直到遇到起始节点
     path = []
@@ -35,12 +36,13 @@ def shortest_path_from_words(graph, start_word, end_word):
     path.reverse()  # 反转路径
 
     # 计算路径长度
-    #path_length = sum(graph.get_edge_weight(path[i], path[i + 1]) for i in range(len(path) - 1))
+    # path_length = sum(graph.get_edge_weight(path[i], path[i + 1]) for i in range(len(path) - 1))
     for i in range(len(path) - 1):
         edge_weight = graph.get_edge_weight(path[i], path[i + 1])
         path_length += edge_weight
 
     return path, path_length
+
 
 def shortest_paths_from_word(graph, start_word):
     paths = {}
@@ -50,6 +52,7 @@ def shortest_paths_from_word(graph, start_word):
             if path is not None:
                 paths[end_word] = (path, path_length)
     return paths
+
 
 def main():
     file_path = "input.txt"
@@ -75,6 +78,7 @@ def main():
             print(f"输入的两个单词之间不可达。")
     else:
         print("无效输入。")
+
 
 if __name__ == "__main__":
     main()

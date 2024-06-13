@@ -2,6 +2,7 @@ import re
 import random
 from ProcessText import process_text
 
+
 def random_traversal(word_graph):
     visited_nodes = set()
     visited_edges = []
@@ -30,11 +31,14 @@ def random_traversal(word_graph):
 
     return visited_edges
 
+
 def write_traversal_to_file(visited_edges, file_path):
-    with open(file_path, 'w') as file:
+    with open(file_path, "w") as file:
         for edge in visited_edges:
             file.write(" ".join(edge))
-'''
+
+
+"""
 if __name__ == "__main__":
     word_graph = process_text("input.txt")  
     visited_edges = random_traversal(word_graph)  # 进行随机遍历
@@ -45,4 +49,4 @@ if __name__ == "__main__":
         print("随机遍历的节点路径：", traversal_text)
     else:
         print("图中没有可用的边进行游走。")
-'''
+"""
